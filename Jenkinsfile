@@ -30,11 +30,15 @@ pipeline{
     post{
         success{
             echo "success"
-            mail bcc: '', body: 'build passed ' "$BUILD_ID", cc: '', from: '', replyTo: '', subject: 'build url is "$BUILD_URL" , to: 'gannapuramashish1996@gmail.com'
+            mail bcc: '', body: "BUILD URL: ${BUILD_URL} TEST RESULTS ${RUN_TESTS_DISPLAY_URL} ", cc: '', from: 'devops@qtdevops.com', replyTo: '', 
+                subject: "${JOB_BASE_NAME}: Build ${BUILD_ID} Succeded", to: 'gannapuramashish1996@gmail.com'
 
         }
         failure{
             echo "failure"
+            mail bcc: '', body: "BUILD URL: ${BUILD_URL} TEST RESULTS ${RUN_TESTS_DISPLAY_URL} ", cc: '', from: 'devops@qtdevops.com', replyTo: '', 
+                subject: "${JOB_BASE_NAME}: Build ${BUILD_ID} failed", to: 'gannapuramashish1996@gmail.com'
+        }
         }
     }
 
