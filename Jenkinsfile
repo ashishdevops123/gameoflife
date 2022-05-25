@@ -30,7 +30,7 @@ pipeline{
     post{
         success{
             echo "success"
-            mail bcc: '', body: 'build passed ', cc: '', from: '', replyTo: '', subject: 'build success', to: 'gannapuramashish1996@gmail.com'
+            mail bcc: '', body: 'build passed ': "$BUILD_ID", cc: '', from: '', replyTo: '', subject: 'build url': "BUILD_URL" , to: 'gannapuramashish1996@gmail.com'
 
         }
         failure{
