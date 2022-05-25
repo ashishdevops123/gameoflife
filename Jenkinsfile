@@ -2,10 +2,10 @@ pipeline{
     agent{ label'JDK8'}
     options{
         timeout(time: 1, unit: 'HOURS')
-        retry(3)
+        retry(1)
         }
     triggers{
-        cron('0 * * * *')
+        cron('0 * * * *')   
     }
     stages{
         stage('sourcecode'){
@@ -20,7 +20,7 @@ pipeline{
                 sh script: 'mvn clean package'
             }
         }
-        stage('junit and archieve'){
+        stage('reporting'){
             steps{
                 junit testResults: 'target/surefire-reports/*.xml'
                
