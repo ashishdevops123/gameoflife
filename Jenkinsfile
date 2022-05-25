@@ -37,7 +37,7 @@ pipeline{
         stage('junit and archieve'){
             steps{
                 junit test results: '**/surefire-reports/*.xml'
-                archiveArtifacts artifacts: '**/target/*.xml'
+               
             }
         }
     }
