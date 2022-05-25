@@ -25,7 +25,8 @@ pipeline{
     stages{
         stage('sourcecode'){
             steps{
-                git url: 'https://github.com/ashishdevops123/gameoflife.git'
+                git url: 'https://github.com/ashishdevops123/gameoflife.git',
+                    branch: develop
                 
             }
         }
