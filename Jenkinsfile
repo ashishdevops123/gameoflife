@@ -22,7 +22,7 @@ pipeline{
         }
         stage('build'){
             steps{
-                sh script: "mvn ${params.GOAL}"
+                sh script: " mvn ${params.GOAL} "
             }
         }
         stage('reporting'){
