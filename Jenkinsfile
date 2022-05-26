@@ -8,9 +8,9 @@ pipeline{
         cron('0 * * * *')   
     
     }
-    parameters{
-        choice(name: 'GOAL', choices: ['compile','package', 'clean package'] )
-    }
+    // parameters{
+    //     choice(name: 'GOAL', choices: ['compile','package', 'clean package'] )
+    // }
 
     stages{
         stage('sourcecode'){
@@ -23,7 +23,7 @@ pipeline{
         stage("build & SonarQube analysis") {
             steps {
                 withSonarQubeEnv('sonar_latest') {
-                sh script: "mvn clean package sonar:sonar"
+                sh script: "mvn package sonar:sonar"
               }
           }
         }
@@ -34,19 +34,19 @@ pipeline{
             }
         }
     }
-    post{
-        success{
-            echo "success"
-            mail bcc: '', body: "BUILD URL: ${BUILD_URL} TEST RESULTS ${RUN_TESTS_DISPLAY_URL} ", cc: '', from: 'devops@qtdevops.com', replyTo: '', 
-                subject: "${JOB_BASE_NAME}: Build ${BUILD_ID} Succeded", to: 'gannapuramashish1996@gmail.com'
+    // post{
+    //     success{
+    //         echo "success"
+    //         mail bcc: '', body: "BUILD URL: ${BUILD_URL} TEST RESULTS ${RUN_TESTS_DISPLAY_URL} ", cc: '', from: 'devops@qtdevops.com', replyTo: '', 
+    //             subject: "${JOB_BASE_NAME}: Build ${BUILD_ID} Succeded", to: 'gannapuramashish1996@gmail.com'
 
-        }
-        failure{
-            echo "failure"
-            mail bcc: '', body: "BUILD URL: ${BUILD_URL} TEST RESULTS ${RUN_TESTS_DISPLAY_URL} ", cc: '', from: 'devops@qtdevops.com', replyTo: '', 
-                subject: "${JOB_BASE_NAME}: Build ${BUILD_ID} failed", to: 'gannapuramashish1996@gmail.com'
-        }
-        }
+    //     }
+    //     failure{
+    //         echo "failure"
+    //         mail bcc: '', body: "BUILD URL: ${BUILD_URL} TEST RESULTS ${RUN_TESTS_DISPLAY_URL} ", cc: '', from: 'devops@qtdevops.com', replyTo: '', 
+    //             subject: "${JOB_BASE_NAME}: Build ${BUILD_ID} failed", to: 'gannapuramashish1996@gmail.com'
+    //     }
+    //     }
     }
 
 
