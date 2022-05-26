@@ -22,7 +22,7 @@ pipeline{
         }
         stage("build & SonarQube analysis") {
             steps{
-                withSonarQubeEnv('sonar_latest') {
+                withSonarQubeEnv('SONAR_LATEST') {
                     sh script: "mvn ${params.GOAL} sonar:sonar"
                 }
           }
