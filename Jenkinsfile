@@ -20,10 +20,12 @@ pipeline{
                 
             }
         }
-        stage('build'){
-            steps{
-                sh script: " mvn ${params.GOAL} "
-            }
+        stage("build & SonarQube analysis") {
+          node {
+              withSonarQubeEnv('sonar_latest') {
+                 sh 'mvn clean package sonar:sonar'
+              }
+          }
         }
         stage('reporting'){
             steps{
