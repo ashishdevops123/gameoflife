@@ -8,9 +8,9 @@ pipeline{
         cron('0 * * * *')   
     
     }
-    // parameters{
-    //     choice(name: 'GOAL', choices: ['compile','package', 'clean package'] )
-    // }
+    parameters{
+        choice(name: 'GOAL', choices: ['compile','package', 'clean package'] )
+    }
 
     stages{
         stage('sourcecode'){
@@ -23,8 +23,8 @@ pipeline{
         stage("build & SonarQube analysis") {
             steps {
                 withSonarQubeEnv('sonar_latest') {
-                sh script: "mvn package sonar:sonar"
-              }
+                    sh script: "mvn ${params.GOAL} sonar:sonar"
+                }
           }
         }
         stage('reporting'){
